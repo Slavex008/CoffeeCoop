@@ -9,9 +9,13 @@
 	$usuario = $_POST["usuario"];
 	$senha = $_POST["senha"];
 	$confirmaSenha = $_POST["confirmaSenha"];
-
 	
-	$conexao = new Conexao('localhost', 'root', '', 'CoffeeCoop');
+	if(strcmp($senha, $confirmaSenha) != 0) {
+		echo "Senha e confirmaSenha diferentes!";
+		return;
+	}
+	
+	$conexao = new Conexao();
 	$link = $conexao->getLink();
 	
 	$gerente = new Gerente(0, $nome, $usuario, $senha, $confirmaSenha);
@@ -19,6 +23,6 @@
 	
 	$gerenteDao = new GerenteDAO();
 	$gerenteDao->cadastrar($gerente, $link);
-	
+	header("Location: ../View/LoginGerente.html");
 	$conexao->fechar();
 ?>

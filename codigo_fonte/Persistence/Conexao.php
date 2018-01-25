@@ -8,12 +8,13 @@ class Conexao{
 	var $bd;
 	var $link;
 	
-	function Conexao($servidor, $usuario, $senha, $bd) {
+	
+	
+	function Conexao($servidor = 'localhost', $usuario = 'root', $senha = 'aluno', $bd = 'CoffeeCoop') {
 		$this->servidor = $servidor;
 		$this->usuario = $usuario;
-		$this->senha = "aluno";
+		$this->senha = $senha;
 		$this->bd = $bd;
-		
 		$this->link = mysqli_connect($this->servidor,
 						$this->usuario,$this->senha,$this->bd);
 	

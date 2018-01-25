@@ -8,7 +8,7 @@
 	$usuario = $_POST["usuario"];
 	$senha = $_POST["senha"];
 	
-	$conexao = new Conexao('localhost', 'root', '', 'CoffeeCoop');
+	$conexao = new Conexao();
 	$link = $conexao->getLink();
 	
 	$produtorDao = new ProdutorDAO();
@@ -33,7 +33,7 @@
 						'".$produtor->getUsuario()."',
 						'".$produtor->getSenha()."');";
 		
-		header("Location: ../Views/EstocarCafe.html"); //Página inicial após login
+		header("Location: ../View/EstocarCafe.html"); //Página inicial após login
 	} catch (Exception $e){
 		echo $e->getMessage();
 	}

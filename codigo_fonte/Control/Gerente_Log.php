@@ -4,11 +4,11 @@
 	include_once("../Persistence/Conexao.php");
 	include_once("../Model/Gerente.php");
 	include_once("../Persistence/GerenteDAO.php");
-	
 	$usuario = $_POST["usuario"];
 	$senha = $_POST["senha"];
-	
-	$conexao = new Conexao('localhost', 'root', '', 'CoffeeCoop');
+	echo $usuario;
+	echo " ".$senha;
+	$conexao = new Conexao();
 	$link = $conexao->getLink();
 	
 	$gerenteDao = new GerenteDAO();
@@ -33,7 +33,7 @@
 						'".$cliente->getUsuario()."',
 						'".$cliente->getSenha()."');";
 		
-		header("Location: ../Views/EstocarCafe.html"); //Página inicial após login
+		header("Location: ../View/EstocarCafe.html"); //Página inicial após login
 	} catch (Exception $e){
 		echo $e->getMessage();
 	}

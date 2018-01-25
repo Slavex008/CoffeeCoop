@@ -10,8 +10,12 @@
 	$senha = $_POST["senha"];
 	$confirmaSenha = $_POST["confirmaSenha"];
 
+	if(strcmp($senha, $confirmaSenha) != 0) {
+		echo "Senha e confirmaSenha diferentes!";
+		return;
+	}
 	
-	$conexao = new Conexao('localhost', 'root', 'aluno', 'CoffeeCoop');
+	$conexao = new Conexao();
 	$link = $conexao->getLink();
 	
 	$cliente = new Cliente(0, $nome, $usuario, $senha, $confirmaSenha);
@@ -19,6 +23,6 @@
 	
 	$clienteDao = new ClienteDAO();
 	$clienteDao->cadastrar($cliente, $link);
-	header("Location: ../Views/LoginCliente.html");
+	header("Location: ../View/LoginCliente.html");
 	$conexao->fechar();
 ?>

@@ -12,7 +12,7 @@
 
 
 	
-	$conexao = new Conexao('localhost', 'root', '', 'CoffeeCoop');
+	$conexao = new Conexao();
 	$link = $conexao->getLink();
 	
 	$cliente = new Cliente(0, $nome, $usuario, $email, $senha, $confirmaSenha);
