@@ -38,10 +38,10 @@
     
             <table border = '2' class='tabela'>
                 <tr>
-                    <th>Tipo</th>
-                    <th>Data de Armazenamento</th>
-                    <th>Quantidade</th>
-                    <th>Valor Por Saca</th>
+                    <th class='cabecalhoinicial'>Tipo</th>
+                    <th class='cabecalhoinicial'>Data de Armazenamento</th>
+                    <th class='cabecalhoinicial'>Quantidade</th>
+                    <th class='cabecalhoinicial'>Valor Por Saca</th>
                 </tr>
                 <?php
                     foreach($rs as $linha){
