@@ -1,15 +1,15 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
-include_once("../Model/SacaDeCafe.php");
+include_once("../Model/Venda.php");
 
-class SacaDeCafeDAO{
+class VendaDAO{
 
-    function cadastrar($saca, $link) {
-        $SQL = "INSERT INTO SacaDeCafe VALUES ('0','".$saca->getTipo()."',
-                                            '".$saca->getDataArmazenamento()."',
-                                            '".$saca->getQuantidade()."',
-                                            '".$saca->getIdProdutor()."');";
+    function cadastrar($venda, $link) {
+        $SQL = "INSERT INTO Venda VALUES ('".$venda->getIdSaca()."',
+                                            '".$venda->getIdCliente()."',
+                                            '".$venda->getValorPorSaca()."',
+                                            '".$venda->getAguardandoAprovacao()."');";
 
         
         if (!mysqli_query($link, $SQL)) {
@@ -20,8 +20,8 @@ class SacaDeCafeDAO{
     }
     
     
-    function buscarSacas($idProdutor, $link) {
-        $SQL = "SELECT * FROM SacaDeCafe WHERE idProdutor = '".$idProdutor."';";
+    function buscarVendas($link) {
+        $SQL = "SELECT * FROM Venda";
 
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
@@ -29,8 +29,8 @@ class SacaDeCafeDAO{
     }
     
     function editar($saca, $link) {
-        $SQL = "UPDATE SacaDeCafe SET tipo = '".$saca->getTipo()."', quantidade = '".$saca->getQuantidade()."',
-                dataArmazenamento = '".$saca->getDataArmazenamento()."' WHERE id = '".$saca->getId()."';";
+        $SQL = "UPDATE SacaDeCafe SET tipo = '".$saca->tipo."', quantidade = '".$saca->quantidade."',
+                dataArmazenamento = '".$saca->dataArmazenamento."' WHERE id = '".$saca->id."';";
         $retorno = mysqli_query($link, $SQL);
         $retorno = $SQL;
         return $retorno;
@@ -43,8 +43,8 @@ class SacaDeCafeDAO{
         return $retorno;
     }
     
-    function excluir($saca, $link) {
-        $SQL = "DELETE FROM SacaDeCafe WHERE usuario ='".$saca->getId()."';";
+    function Excluir($usuario, $link) {
+        $SQL = "DELETE FROM Cliente WHERE usuario ='".$cliente->getUsuario()."';";
         echo $SQL."<br>";
         
         if(!mysqli_query($link, $SQL)){
