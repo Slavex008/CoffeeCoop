@@ -2,18 +2,21 @@
     header('Content-Type: text/html; charset=utf-8');
     
     include_once("../Persistence/Conexao.php");
+    include_once("../Model/SacaDeCafe.php");
     include_once("../Model/Venda.php");
+    include_once("../Persistence/SacaDeCafeDAO.php");
     include_once("../Persistence/VendaDAO.php");
-    
     
     $conexao = new Conexao();
     $link = $conexao->getLink();
     
+    $tipo = $_POST["inputbusca"];
     session_start();
     $idCliente = $_SESSION["user"];
     
     $vendaDao = new VendaDAO();
-    $retorno = $vendaDao->buscarVendas($link);
+    //echo $vendaDao->buscarVendas()->fetch_all();
+    $retorno = $vendaDao->buscarVendas($tipo, $link);
     
     $rs = $retorno->fetch_all();
 
@@ -26,40 +29,46 @@
     </head>
 
     <body>
-        
-    <div class='telainicial' align='center'>
-        <form>
-            <h2 align='center'>Sacas em oferta</h2>
+    <div class='telainicial'>
+        <h1>Sacas em Oferta</h1>
+        <form action='../View/TelaInicialCliente.php' method="post">
             <fieldset>
-                <input class='inputbusca' name="tipo" placeholder = "Digite o tipo de café" type = "text" maxlength = "40" required autofocus>
-                <button name = "submit" type = "submit" class='btnbusca'>Consultar</button>
+                <?php
+                    echo "<input class='inputbusca' name='inputbusca' placeholder = 'Digite o tipo de café' type = 'text' maxlength = '40' autofocus value='".$tipo."'>"
+                ?>
+                <button name = "buscaTipo" type = "submit" class='btninicial'>Consultar</button>
             </fieldset>
-        
         </form>
+        <form>
     
-        <table border = '2' class='tabela' align='center'>
-            <tr>
-                <th>Tipo</th>
-                <th>Data de Armazenamento</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-            </tr>
-            <?php
-                foreach($rs as $linha){
-                    $indice = $linha[0];
-                    echo "<tr>";
-                    echo "<td>".$linha[1]."</td>";
-                    echo "<td>".$linha[2]."</td>";
-                    echo "<td>".$linha[3]."</td>";
-                    echo "<td>".$linha[4]."</td>";
-                    echo "<td><a href='ComprarCafe.php?id=".$indice."'><button name = 'comprar".$indice."' type = 'submit'>Comprar</button></a></td>";
-                    
-                    echo "</tr>";
-                }   
-            ?>
-        </table>
-        <button name = "submit" type = "submit">Voltar</button>
-
+            <table border = '2' class='tabela'>
+                <tr>
+                    <th class='cabecalhoinicial'>Tipo</th>
+                    <th class='cabecalhoinicial'>Data de Armazenamento</th>
+                    <th class='cabecalhoinicial'>Quantidade</th>
+                    <th class='cabecalhoinicial'>Valor Total</th>
+                </tr>
+                <?php
+                    foreach($rs as $linha){
+                        $indice = $linha[0];
+                        $data = explode("-", $linha[6], 3);
+                        echo "<tr>";
+                        echo "<td>".$linha[5]."</td>";
+                        echo "<td>".$data[2]."/".$data[1]."/".$data[0]."</td>";
+                        echo "<td>".$linha[7]."</td>";
+                        echo "<td>".($linha[7]*$linha[8])."</td>";
+                        echo "<td class='botaotabela'><a href='../Control/Editar_Venda.php?id=".$indice."' title='Comprar'><button class='btneditar' name='c".$indice."' type='button'>C</button></a></td>";
+                        echo "</tr>";
+                    }   
+                ?>
+            </table>
+        </form>
+        <br><br>
+        <div>
+            <a href="../Control/Logout.php"><button name = "submit" type = "submit" class='btninicial'>Sair</button></a>
+        </div>
     </div>
+    
     </body>
 </html>
+

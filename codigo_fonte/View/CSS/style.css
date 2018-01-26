@@ -185,6 +185,7 @@ fieldset {
     font-size: 15px;
     font-family: Arial;
     border: 0;
+    margin-bottom: 10px;
 }
 
 .btninicial:hover {
@@ -199,15 +200,18 @@ fieldset {
     text-align: center;
     margin-right: auto; 
     margin-left: auto;
+    width: 600px;
+    font-size: 14px;
 }
 
 .telainicial {
     background-color: white;
-    width: 400px;
+    width: 630px;
     margin: 0 auto;
     text-align: center;
     margin-top: 150;
     position: relative;
+    
 }
 
 .btneditar {
@@ -216,5 +220,16 @@ fieldset {
     border: 0;
     width: 30px;
     height: 28px;
+    text-align: center;
 }
 
+.botaotabela {
+    text-align: center;
+    margin: 0 0 0 0;
+    background: black;
+
+}
+
+.cabecalhoinicial {
+    font-size: 16px;
+}
