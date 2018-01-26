@@ -73,6 +73,7 @@ CREATE TABLE `SacaDeCafe` (
   `tipo` varchar(10) NOT NULL,
   `dataArmazenamento` date NOT NULL,
   `quantidade` int(11) NOT NULL,
+  `valorPorSaca` float NOT NULL,
   `idProdutor` int(11) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

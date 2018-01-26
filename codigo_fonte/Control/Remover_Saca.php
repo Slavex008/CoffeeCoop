@@ -4,7 +4,13 @@
     include_once("../Persistence/Conexao.php");
     include_once("../Model/SacaDeCafe.php");
     include_once("../Persistence/SacaDeCafeDAO.php");
-    echo $_GET["id"];
-    //header("Location: ../View/TelaInicialProdutor");
+    $id = $_GET["id"];
+    $conexao = new Conexao();
+    $link = $conexao->getLink();
+    
+    $sacaDAO = new SacaDeCafeDAO();
+    $sacaDAO->excluir($id, $link);
+    
+    header("Location: ../View/TelaInicialProdutor.php");
     
 ?>

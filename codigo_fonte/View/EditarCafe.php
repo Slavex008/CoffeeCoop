@@ -3,7 +3,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
 
 <head>
-    <title>Estocar café</title>
+    <title>Editar saca</title>
     <meta charset = 'UTF-8'>
     <meta http-equiv='content-type' content='text/html;charset=utf-8' />
     <link rel = 'stylesheet' href = 'CSS/style.css'>
@@ -32,11 +32,13 @@
             $tipo = NULL;
             $dt = NULL;
             $qtd = NULL;
+            $valor = NULL;
             
             foreach($rs as $linha){
                 $tipo = $linha[1];
                 $dt = $linha[2];
                 $qtd = $linha[3];
+                $valor = $linha[4];
             } 
             
             
@@ -55,7 +57,12 @@
                 <label> Data de armazenamento: </label>
                 <input name='data' value='".$dt."' type = 'date' required>
             </fieldset>
-        
+            
+            <fieldset>
+                <label> Valor Por Saca: </label>
+                <input name='valor' value='".$valor."' type = 'text' required>
+            </fieldset>
+            
             <fieldset>
                 <button name = 'submit' type = 'submit' formaction='../Control/Editar_Cafe.php?id=".$id."'>Editar Café</button>
             </fieldset>";

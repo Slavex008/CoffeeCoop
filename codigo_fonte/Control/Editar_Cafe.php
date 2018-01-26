@@ -10,11 +10,11 @@
     $quantidade = $_POST["quantidade"];
     $data = $_POST["data"];
     $id = $_GET["id"];
-    
+    $valorPorSaca = $_POST["valor"];
     $conexao = new Conexao();
     $link = $conexao->getLink();
     
-    $saca = new SacaDeCafe($id, $idProdutor, $tipo, $quantidade, $data);
+    $saca = new SacaDeCafe($id, $idProdutor, $tipo, $quantidade, $valorPorSaca, $data);
 
     
     $sacaDao = new SacaDeCafeDAO();

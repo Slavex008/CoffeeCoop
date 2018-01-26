@@ -9,6 +9,7 @@ class SacaDeCafeDAO{
         $SQL = "INSERT INTO SacaDeCafe VALUES ('0','".$saca->getTipo()."',
                                             '".$saca->getDataArmazenamento()."',
                                             '".$saca->getQuantidade()."',
+                                            '".$saca->getValorPorSaca()."',
                                             '".$saca->getIdProdutor()."');";
 
         
@@ -29,8 +30,11 @@ class SacaDeCafeDAO{
     }
     
     function editar($saca, $link) {
-        $SQL = "UPDATE SacaDeCafe SET tipo = '".$saca->getTipo()."', quantidade = '".$saca->getQuantidade()."',
-                dataArmazenamento = '".$saca->getDataArmazenamento()."' WHERE id = '".$saca->getId()."';";
+        $SQL = "UPDATE SacaDeCafe SET tipo = '".$saca->getTipo()."', 
+                                      quantidade = '".$saca->getQuantidade()."',
+                                      dataArmazenamento = '".$saca->getDataArmazenamento()."',
+                                      valorPorSaca = '".$saca->getValorPorSaca()."'
+                                      WHERE id = '".$saca->getId()."';";
         $retorno = mysqli_query($link, $SQL);
         $retorno = $SQL;
         return $retorno;
@@ -43,29 +47,14 @@ class SacaDeCafeDAO{
         return $retorno;
     }
     
-    function excluir($saca, $link) {
-        $SQL = "DELETE FROM SacaDeCafe WHERE usuario ='".$saca->getId()."';";
+    function excluir($id, $link) {
+        $SQL = "DELETE FROM SacaDeCafe WHERE id ='".$id."';";
         echo $SQL."<br>";
         
         if(!mysqli_query($link, $SQL)){
             die("Erro na exclusão de cliente");
         }
         echo "Cliente deletado com sucesso!";
-        
-    }
-    
-    function logar($usuario, $senha, $link) {
-        $SQL = "SELECT * FROM Cliente WHERE usuario ='".$usuario."' and senha = '".$senha."';";
-
-        $retorno = mysqli_query($link, $SQL);
-        echo $SQL;      
-        
-        if (mysqli_num_rows($retorno) > 0) {
-            return $retorno;
-        } else {
-            //die("Erro na consulta de cliente");
-            throw new Exception('usuario ou senha incorretos!');
-        }
         
     }
     

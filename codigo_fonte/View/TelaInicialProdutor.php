@@ -40,8 +40,7 @@
                     <th>Tipo</th>
                     <th>Data de Armazenamento</th>
                     <th>Quantidade</th>
-                    <th></th>
-                    <th></th>
+                    <th>Valor Por Saca</th>
                 </tr>
                 <?php
                     foreach($rs as $linha){
@@ -50,6 +49,7 @@
                         echo "<td>".$linha[1]."</td>";
                         echo "<td>".$linha[2]."</td>";
                         echo "<td>".$linha[3]."</td>";
+                        echo "<td>".$linha[4]."</td>";
                         echo "<td><a href='EditarCafe.php?id=".$indice."'><button class='btneditar' name='e".$indice."' type='button'>E</button></a></td>";
                         echo "<td><a href='../Control/Remover_Saca.php?id=".$indice."'><button class='btneditar' name = 'r".$indice."' type='button'>R</button></a></td>";
                         echo "</tr>";
