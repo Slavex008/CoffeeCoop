@@ -1,25 +1,26 @@
 <?php
-	header('Content-Type: text/html; charset=utf-8');
-	
-	include_once("../Persistence/Conexao.php");
-	include_once("../Model/Cliente.php");
-	include_once("../Persistence/ClienteDAO.php");
-	
-	$idProdutor;
-	$tipo = $_POST["tipo"];
-	$quantidade = $_POST["quantidade"];
-	$data = $_POST["data"];
+    header('Content-Type: text/html; charset=utf-8');
+    
+    include_once("../Persistence/Conexao.php");
+    include_once("../Model/Cliente.php");
+    include_once("../Persistence/ClienteDAO.php");
+    session_start();
+    $idProdutor = $_SESSION["user"];
+    $tipo = $_POST["tipo"];
+    $quantidade = $_POST["quantidade"];
+    $data = $_POST["data"];
+    echo "AQUI\n\n\n\n";
+    echo $idProdutor;
+    echo "<br><br>";
+    
+    $conexao = new Conexao();
+    $link = $conexao->getLink();
+    
+    $saca = new SacaDeCafe(0, $idProdutor, $tipo, $quantidade, $data);
 
-
-	
-	$conexao = new Conexao();
-	$link = $conexao->getLink();
-	
-	$cliente = new Cliente(0, $nome, $usuario, $email, $senha, $confirmaSenha);
-
-	
-	$clienteDao = new ClienteDAO();
-	$clienteDao->cadastrar($cliente, $link);
-	
-	$conexao->fechar();
+    
+    $sacaDao = new SacaDeCafeDAO();
+    $sacaDao->cadastrar($saca, $link);
+    
+    $conexao->fechar();
 ?>
