@@ -170,9 +170,10 @@ fieldset {
     background-color: white;
     font-size: 15px;
     font-family: Arial;
+    margin-top: 25;
 }
 
-.btnbusca {
+.btninicial {
     background-color: lightgreen;
     color: white;
     width: 80px;
@@ -182,7 +183,7 @@ fieldset {
     border: 0;
 }
 
-.btnbusca:hover {
+.btninicial:hover {
     background: #43A047;
     -webkit-transition: background 0.3s ease-in-out;
     -moz-transition: background 0.3s ease-in-out;
@@ -191,9 +192,25 @@ fieldset {
 
 .tabela {
     background-color: lightgray;
+    text-align: center;
+    margin-right: auto; 
+    margin-left: auto;
 }
 
 .telainicial {
+    background-color: white;
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 150;
+    position: relative;
 }
 
+.btneditar {
+    background-color: black;
+    color: white;
+    border: 0;
+    width: 30px;
+    height: 28px;
+}
 

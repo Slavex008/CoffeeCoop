@@ -27,16 +27,16 @@
 
     <body>
         
-    <div class='telainicial' align='center'>
+    <div class='telainicial'>
         <form>
             <fieldset>
                 <input class='inputbusca' name="tipo" placeholder = "Digite o tipo de café" type = "text" maxlength = "40" required autofocus>
-                <button name = "submit" type = "submit" class='btnbusca'>Consultar</button>
+                <button name = "submit" type = "submit" class='btninicial'>Consultar</button>
             </fieldset>
         
         </form>
     
-        <table border = '2' class='tabela' align='center'>
+        <table border = '2' class='tabela'>
             <tr>
                 <th>Tipo</th>
                 <th>Data de Armazenamento</th>
@@ -49,15 +49,16 @@
                     echo "<td>".$linha[1]."</td>";
                     echo "<td>".$linha[2]."</td>";
                     echo "<td>".$linha[3]."</td>";
-                    echo "<td><a href='EditarCafe.php?id=".$indice."'><button name = 'e".$indice."' type = 'submit'>E</button></a></td>";
+                    echo "<td><a href='EditarCafe.php?id=".$indice."'><button class='btneditar'name = 'e".$indice."' type = 'submit'>E</button></a></td>";
                     
                     echo "</tr>";
                 }   
             ?>
         </table>
-        <a href="EstocarCafe.html"><button name = "submit" type = "submit">Inserir</button></a>
-        <button name = "submit" type = "submit">Retirar</button>
-        <button name = "submit" type = "submit">Vender</button>
+        <br><br>
+        <a href="EstocarCafe.html"><button name = "submit" type = "submit" class='btninicial'>Inserir</button></a>
+        <button name = "submit" type = "submit" class='btninicial'>Retirar</button>
+        <button name = "submit" type = "submit" class='btninicial'>Vender</button>
 
     </div>
     </body>
