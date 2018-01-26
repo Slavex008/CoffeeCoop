@@ -5,15 +5,14 @@
     include_once("../Model/SacaDeCafe.php");
     include_once("../Persistence/SacaDeCafeDAO.php");
     
-    
     $conexao = new Conexao();
     $link = $conexao->getLink();
-    
+    $tipo = $_POST["inputbusca"];
     session_start();
     $idProdutor = $_SESSION["user"];
     
     $sacaDeCafeDao = new SacaDeCafeDAO();
-    $retorno = $sacaDeCafeDao->buscarSacas($idProdutor, $link);
+    $retorno = $sacaDeCafeDao->buscarSacas($idProdutor, $tipo, $link);
     
     $rs = $retorno->fetch_all();
 
@@ -26,14 +25,16 @@
     </head>
 
     <body>
-        
     <div class='telainicial'>
-        <form>
+        <form action='../View/TelaInicialProdutor.php' method="post">
             <fieldset>
-                <input class='inputbusca' name="tipo" placeholder = "Digite o tipo de café" type = "text" maxlength = "40" autofocus>
-                <button name = "submit" type = "submit" class='btninicial'>Consultar</button>
+                <?php
+                echo "<input class='inputbusca' name='inputbusca' placeholder = 'Digite o tipo de café' type = 'text' maxlength = '40' autofocus value='".$tipo."'>"
+                ?>
+                <button name = "buscaTipo" type = "submit" class='btninicial'>Consultar</button>
             </fieldset>
-        
+        </form>
+        <form>
     
             <table border = '2' class='tabela'>
                 <tr>

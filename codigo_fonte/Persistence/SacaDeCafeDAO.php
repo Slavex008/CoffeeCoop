@@ -21,8 +21,14 @@ class SacaDeCafeDAO{
     }
     
     
-    function buscarSacas($idProdutor, $link) {
-        $SQL = "SELECT * FROM SacaDeCafe WHERE idProdutor = '".$idProdutor."';";
+    function buscarSacas($idProdutor, $tipo, $link) {
+        $SQL = NULL;
+        if($tipo == NULL) {
+            $SQL = "SELECT * FROM SacaDeCafe WHERE idProdutor = '".$idProdutor."';";
+        } else {
+            $SQL = "SELECT * FROM SacaDeCafe WHERE tipo = '".$tipo."' AND
+                                                   idProdutor = '".$idProdutor."';";
+        }
 
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
@@ -42,6 +48,13 @@ class SacaDeCafeDAO{
     
     function buscarSaca($id, $link) {
         $SQL = "SELECT * FROM SacaDeCafe WHERE id = '".$id."';";
+
+        $retorno = mysqli_query($link, $SQL);
+        return $retorno;
+    }
+    
+    function buscarPorTipo($tipo, $link) {
+        
 
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
