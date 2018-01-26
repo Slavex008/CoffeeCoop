@@ -3,43 +3,51 @@ header('Content-Type: text/html; charset=utf-8');
 
 include_once("../Model/Venda.php");
 
-class VendaDAO{
+class VendaDAO {
 
-    function cadastrar($venda, $link) {
+    function cadastrarVenda($venda, $link) {
         $SQL = "INSERT INTO Venda VALUES ('".$venda->getIdSaca()."',
-                                            '".$venda->getIdCliente()."',
+                                            NULL,
                                             '".$venda->getValorPorSaca()."',
-                                            '".$venda->getAguardandoAprovacao()."');";
+                                            0);";
 
-        
         if (!mysqli_query($link, $SQL)) {
-            die("Erro na inserção do usuário");
+            return ("A saca ja está a venda");
         }
-        echo "Saca cadastrado com sucesso!";
+        return "Saca colocada a venda!";
         
     }
     
     
-    function buscarVendas($link) {
-        $SQL = "SELECT * FROM Venda";
-
+    function buscarVendas($tipo, $link) {
+        echo "AQUII";
+        $SQL = NULL;
+        if($tipo == NULL) {
+            $SQL = "SELECT * FROM Venda v
+                    JOIN SacaDeCafe s
+                    ON v.idSaca = s.id
+                    WHERE aguardandoAprovacao = '0';
+                    ";
+        } else {
+            $SQL = "SELECT * FROM Venda v
+                    JOIN SacaDeCafe s
+                    ON v.idSaca = s.id
+                    WHERE s.tipo ='".$tipo."'
+                          AND aguardandoAprovacao = '0';
+                    ";
+        }
+        echo $SQL;
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
 
     }
     
-    function editar($saca, $link) {
-        $SQL = "UPDATE SacaDeCafe SET tipo = '".$saca->tipo."', quantidade = '".$saca->quantidade."',
-                dataArmazenamento = '".$saca->dataArmazenamento."' WHERE id = '".$saca->id."';";
+    function editarAguardandoAprovacao($idSaca, $idCliente, $aguardandoAprovacao, $link) {
+        $SQL = "UPDATE Venda SET idCliente = '".$idCliente."',
+                                  aguardandoAprovacao = '".$aguardandoAprovacao."'
+                                  WHERE idSaca = '".$idSaca."';";
         $retorno = mysqli_query($link, $SQL);
         $retorno = $SQL;
-        return $retorno;
-    }
-    
-    function buscarSaca($id, $link) {
-        $SQL = "SELECT * FROM SacaDeCafe WHERE id = '".$id."';";
-
-        $retorno = mysqli_query($link, $SQL);
         return $retorno;
     }
     
