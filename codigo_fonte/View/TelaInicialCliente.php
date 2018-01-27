@@ -1,24 +1,13 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
-    
-    include_once("../Persistence/Conexao.php");
-    include_once("../Model/SacaDeCafe.php");
-    include_once("../Model/Venda.php");
-    include_once("../Persistence/SacaDeCafeDAO.php");
-    include_once("../Persistence/VendaDAO.php");
-    
-    $conexao = new Conexao();
-    $link = $conexao->getLink();
+    include_once("../Control/C_Venda.php");
     
     $tipo = $_POST["inputbusca"];
     session_start();
     $idCliente = $_SESSION["user"];
     
-    $vendaDao = new VendaDAO();
-    //echo $vendaDao->buscarVendas()->fetch_all();
-    $retorno = $vendaDao->buscarVendas($tipo, $link);
-    
-    $rs = $retorno->fetch_all();
+    $controller = new C_Venda();
+    $rs = $controller->consultaVenda($tipo, "c");
 
 ?>
 
