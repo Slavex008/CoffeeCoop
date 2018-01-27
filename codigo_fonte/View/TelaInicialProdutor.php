@@ -15,7 +15,7 @@
     $retorno = $sacaDeCafeDao->buscarSacas($idProdutor, $tipo, $link);
     
     $rs = $retorno->fetch_all();
-
+    
 ?>
 
 <html>

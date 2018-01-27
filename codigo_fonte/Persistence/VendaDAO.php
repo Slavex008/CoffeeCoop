@@ -42,38 +42,49 @@ class VendaDAO {
 
     }
     
-    function editarAguardandoAprovacao($idSaca, $idCliente, $aguardandoAprovacao, $link) {
-        $SQL = "UPDATE Venda SET idCliente = '".$idCliente."',
-                                  aguardandoAprovacao = '".$aguardandoAprovacao."'
-                                  WHERE idSaca = '".$idSaca."';";
+    function editarAguardandoAprovacao($idSaca, $idCliente, $aguardandoAprovacao, $dataCompra, $link) {
+        if($idCliente != NULL) {
+            $idCliente = "'".$idCliente."'";
+            $dataCompra = "'".$dataCompra."'";
+        } else {
+            $idCliente = 'NULL';
+            $dataCompra = 'NULL';
+        }
+        $SQL = "UPDATE Venda SET idCliente = ".$idCliente.",
+                                 aguardandoAprovacao = '".$aguardandoAprovacao."',
+                                 dataCompra = ".$dataCompra."
+                                 WHERE idSaca = '".$idSaca."';";
         $retorno = mysqli_query($link, $SQL);
         $retorno = $SQL;
         return $retorno;
     }
     
-    function Excluir($usuario, $link) {
-        $SQL = "DELETE FROM Cliente WHERE usuario ='".$cliente->getUsuario()."';";
-        echo $SQL."<br>";
-        
-        if(!mysqli_query($link, $SQL)){
-            die("Erro na exclusão de cliente");
-        }
-        echo "Cliente deletado com sucesso!";
-        
+    function buscarComprasPendentes($link) {
+    
+        $SQL = "SELECT v.idSaca, c.nome as cNome, p.nome as pNome, s.valorPorSaca, s.quantidade, v.dataCompra  FROM Venda v
+                JOIN SacaDeCafe s
+                ON v.idSaca = s.id
+                JOIN Cliente c
+                ON v.idCliente = c.id
+                JOIN Produtor p
+                ON s.idProdutor = p.id
+                WHERE aguardandoAprovacao = '1';
+                ";
+    
+        echo $SQL;
+        $retorno = mysqli_query($link, $SQL);
+        return $retorno;
+
     }
     
-    function logar($usuario, $senha, $link) {
-        $SQL = "SELECT * FROM Cliente WHERE usuario ='".$usuario."' and senha = '".$senha."';";
+    function excluirVenda($id, $link) {
+        $SQL = "DELETE FROM Venda WHERE idSaca ='".$id."';";
 
-        $retorno = mysqli_query($link, $SQL);
-        echo $SQL;      
-        
-        if (mysqli_num_rows($retorno) > 0) {
-            return $retorno;
-        } else {
-            //die("Erro na consulta de cliente");
-            throw new Exception('usuario ou senha incorretos!');
+        echo $SQL."<br>";
+        if(!mysqli_query($link, $SQL)){
+            die("Erro na exclusão de vendad");
         }
+        echo "Cliente deletado com sucesso!";
         
     }
     

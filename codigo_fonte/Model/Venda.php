@@ -6,12 +6,14 @@ class Venda{
     private $idCliente;
     private $valorPorSaca;
     private $aguardandoAprovacao;
+    private $dataCompra;
 
-    function Venda($idSaca, $idCliente, $valorPorSaca, $aguardandoAprovacao = 0) {
+    function Venda($idSaca, $idCliente, $valorPorSaca, $aguardandoAprovacao = 0, $dataCompra) {
         $this->idSaca = $idSaca;
         $this->idCliente = $idCliente;
         $this->valorPorSaca = $valorPorSaca;
         $this->aguardandoAprovacao = $aguardandoAprovacao;
+        $this->dataCompra = $dataCompra;
     }
 
     function getIdSaca(){
@@ -26,7 +28,9 @@ class Venda{
     function getAguardandoAprovacao(){
         return $this->aguardandoAprovacao;
     }
-
+    function getDataCompra() {
+        return $this->dataCompra;
+    }
 }
 
 ?>
