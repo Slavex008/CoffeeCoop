@@ -6,7 +6,7 @@ include_once("../Model/Produtor.php");
 class ProdutorDAO{
 
     
-    function cadastrar($produtor, $link, $confirmaSenha) {
+    public function cadastrar($produtor, $link, $confirmaSenha) {
         if(strcmp($produtor->getSenha(), $confirmaSenha) != 0) {
             return -2;
         }
@@ -23,18 +23,17 @@ class ProdutorDAO{
         
     }
     
-    function Excluir($produtor, $link) {
+    public function excluir($produtor, $link) {
         $SQL = "DELETE FROM Produtor WHERE usuario ='".$produtor->getUsuario()."';";
-        echo $SQL."<br>";
         
         if(!mysqli_query($link, $SQL)){
-            die("Erro na exclusão de cliente");
+            return ("Erro na exclusão de Produtor");
         }
-        echo "Cliente deletado com sucesso!";
+        return "Produtor deletado com sucesso!";
         
     }
     
-    function logar($usuario, $senha, $link) {
+    public function logar($usuario, $senha, $link) {
         $SQL = "SELECT * FROM Produtor WHERE usuario ='".$usuario."' and senha = '".$senha."';";
 
         $retorno = mysqli_query($link, $SQL);
@@ -42,8 +41,7 @@ class ProdutorDAO{
         if (mysqli_num_rows($retorno) > 0) {
             return $retorno;
         } else {
-            //die("Erro na consulta de cliente");
-            throw new Exception('usuario ou senha incorretos!');
+            return -1;
         }
         
     }

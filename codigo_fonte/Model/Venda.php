@@ -8,7 +8,7 @@ class Venda{
     private $aguardandoAprovacao;
     private $dataCompra;
 
-    function Venda($idSaca, $idCliente, $valorPorSaca, $aguardandoAprovacao = 0, $dataCompra) {
+    public function Venda($idSaca, $idCliente, $valorPorSaca, $aguardandoAprovacao = 0, $dataCompra) {
         $this->idSaca = $idSaca;
         $this->idCliente = $idCliente;
         $this->valorPorSaca = $valorPorSaca;
@@ -16,19 +16,19 @@ class Venda{
         $this->dataCompra = $dataCompra;
     }
 
-    function getIdSaca(){
+    public function getIdSaca(){
         return $this->idSaca;
     }
-    function getIdCliente(){
+    public function getIdCliente(){
         return $this->idCliente;
     }
-    function getValorPorSaca(){
+    public function getValorPorSaca(){
         return $this->valorPorSaca;
     }
-    function getAguardandoAprovacao(){
+    public function getAguardandoAprovacao(){
         return $this->aguardandoAprovacao;
     }
-    function getDataCompra() {
+    public function getDataCompra() {
         return $this->dataCompra;
     }
 }

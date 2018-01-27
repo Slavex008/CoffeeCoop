@@ -2,14 +2,14 @@
 header('Content-Type: text/html; charset=utf-8');
 
 class Produtor{
-    var $id;
-    var $nome;
-    var $usuario;
-    var $senha;
+    private $id;
+    private $nome;
+    private $usuario;
+    private $senha;
 
 
     
-    function Produtor($id, $nome, $usuario, $senha) {
+    public function Produtor($id, $nome, $usuario, $senha) {
 
         $this->id = $id;
         $this->nome = $nome;
@@ -17,17 +17,17 @@ class Produtor{
         $this->senha = $senha;  
     }
 
-    function getId(){
+    public function getId(){
         return $this->id;
     }
 
-    function getNome(){
+    public function getNome(){
         return $this->nome;
     }
-    function getUsuario(){
+    public function getUsuario(){
         return $this->usuario;
     }
-    function getSenha(){
+    public function getSenha(){
         return $this->senha;
     }
     

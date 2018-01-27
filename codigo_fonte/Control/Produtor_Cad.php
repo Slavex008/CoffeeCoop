@@ -26,7 +26,7 @@
                 $caminho = "../View/LoginProdutor.html";
                 break;
             case -1:
-                $msg = "Ocorreu um erro no cadastro! Talvez o nome de usuario ja esteja sendo usado.";
+                $msg = "Ocorreu um erro no cadastro! Pode ser que o nome de usuario ja esteja sendo usado.";
                 $textoBTN = "Retornar";
                 $caminho = "../View/CadastroProdutor.html";
                 break;
@@ -36,10 +36,10 @@
                 $caminho = "../View/CadastroProdutor.html";
                 break;
     }
+    $conexao->fechar();
     echo "<h4></h4>".$msg."<br>
           <a href='".$caminho."'><button>".$textoBTN."</button></a>";
 
     
     //header("Location: ../View/LoginProdutor.html");
-    $conexao->fechar();
 ?>

@@ -9,11 +9,13 @@ class VendaDAO {
         $SQL = "INSERT INTO Venda VALUES ('".$venda->getIdSaca()."',
                                             NULL,
                                             '".$venda->getValorPorSaca()."',
-                                            0);";
+                                            0, 
+                                            NULL);";
 
         if (!mysqli_query($link, $SQL)) {
-            return ("A saca ja está a venda");
+            return "Erro! Pode ser que a saca ja está a venda";
         }
+
         return "Saca colocada a venda!";
         
     }
@@ -36,7 +38,7 @@ class VendaDAO {
                           AND aguardandoAprovacao = '0';
                     ";
         }
-        echo $SQL;
+        
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
 
@@ -54,9 +56,11 @@ class VendaDAO {
                                  aguardandoAprovacao = '".$aguardandoAprovacao."',
                                  dataCompra = ".$dataCompra."
                                  WHERE idSaca = '".$idSaca."';";
-        $retorno = mysqli_query($link, $SQL);
-        $retorno = $SQL;
-        return $retorno;
+        
+        if (!mysqli_query($link, $SQL)) {
+            return "Saca nao editada";
+        }
+        return "Saca editada!";
     }
     
     function buscarComprasPendentes($link) {
@@ -82,9 +86,9 @@ class VendaDAO {
 
         echo $SQL."<br>";
         if(!mysqli_query($link, $SQL)){
-            die("Erro na exclusão de vendad");
+            return "Erro na exclusão de vendas";
         }
-        echo "Cliente deletado com sucesso!";
+        return "Venda deletado com sucesso!";
         
     }
     
