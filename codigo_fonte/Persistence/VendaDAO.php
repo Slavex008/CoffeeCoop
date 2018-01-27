@@ -9,11 +9,13 @@ class VendaDAO {
         $SQL = "INSERT INTO Venda VALUES ('".$venda->getIdSaca()."',
                                             NULL,
                                             '".$venda->getValorPorSaca()."',
-                                            0);";
+                                            0, 
+                                            NULL);";
 
         if (!mysqli_query($link, $SQL)) {
-            return ("A saca ja está a venda");
+            return "Erro! Pode ser que a saca ja está a venda";
         }
+
         return "Saca colocada a venda!";
         
     }
@@ -36,44 +38,57 @@ class VendaDAO {
                           AND aguardandoAprovacao = '0';
                     ";
         }
+        
+        $retorno = mysqli_query($link, $SQL);
+        return $retorno;
+
+    }
+    
+    function editarAguardandoAprovacao($idSaca, $idCliente, $aguardandoAprovacao, $dataCompra, $link) {
+        if($idCliente != NULL) {
+            $idCliente = "'".$idCliente."'";
+            $dataCompra = "'".$dataCompra."'";
+        } else {
+            $idCliente = 'NULL';
+            $dataCompra = 'NULL';
+        }
+        $SQL = "UPDATE Venda SET idCliente = ".$idCliente.",
+                                 aguardandoAprovacao = '".$aguardandoAprovacao."',
+                                 dataCompra = ".$dataCompra."
+                                 WHERE idSaca = '".$idSaca."';";
+        
+        if (!mysqli_query($link, $SQL)) {
+            return "Saca nao editada";
+        }
+        return "Saca editada!";
+    }
+    
+    function buscarComprasPendentes($link) {
+    
+        $SQL = "SELECT v.idSaca, c.nome as cNome, p.nome as pNome, s.valorPorSaca, s.quantidade, v.dataCompra  FROM Venda v
+                JOIN SacaDeCafe s
+                ON v.idSaca = s.id
+                JOIN Cliente c
+                ON v.idCliente = c.id
+                JOIN Produtor p
+                ON s.idProdutor = p.id
+                WHERE aguardandoAprovacao = '1';
+                ";
+    
         echo $SQL;
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
 
     }
     
-    function editarAguardandoAprovacao($idSaca, $idCliente, $aguardandoAprovacao, $link) {
-        $SQL = "UPDATE Venda SET idCliente = '".$idCliente."',
-                                  aguardandoAprovacao = '".$aguardandoAprovacao."'
-                                  WHERE idSaca = '".$idSaca."';";
-        $retorno = mysqli_query($link, $SQL);
-        $retorno = $SQL;
-        return $retorno;
-    }
-    
-    function Excluir($usuario, $link) {
-        $SQL = "DELETE FROM Cliente WHERE usuario ='".$cliente->getUsuario()."';";
-        echo $SQL."<br>";
-        
-        if(!mysqli_query($link, $SQL)){
-            die("Erro na exclusão de cliente");
-        }
-        echo "Cliente deletado com sucesso!";
-        
-    }
-    
-    function logar($usuario, $senha, $link) {
-        $SQL = "SELECT * FROM Cliente WHERE usuario ='".$usuario."' and senha = '".$senha."';";
+    function excluirVenda($id, $link) {
+        $SQL = "DELETE FROM Venda WHERE idSaca ='".$id."';";
 
-        $retorno = mysqli_query($link, $SQL);
-        echo $SQL;      
-        
-        if (mysqli_num_rows($retorno) > 0) {
-            return $retorno;
-        } else {
-            //die("Erro na consulta de cliente");
-            throw new Exception('usuario ou senha incorretos!');
+        echo $SQL."<br>";
+        if(!mysqli_query($link, $SQL)){
+            return "Erro na exclusão de vendas";
         }
+        return "Venda deletado com sucesso!";
         
     }
     

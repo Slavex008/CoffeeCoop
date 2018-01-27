@@ -21,7 +21,7 @@
     }
     $retorno = NULL;
     if($saca != NULL) {
-        $venda = new Venda($idSaca, NULL, $saca->getValorPorSaca(), 0);    
+        $venda = new Venda($idSaca, NULL, $saca->getValorPorSaca(), 0, NULL);    
         $vendaDao = new VendaDAO();
         $retorno = $vendaDao->cadastrarVenda($venda, $link);
         

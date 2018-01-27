@@ -2,13 +2,13 @@
 header('Content-Type: text/html; charset=utf-8');
 
 class SacaDeCafe{
-    var $id;
-    var $idProdutor;
-    var $tipo;
-    var $quantidade;
-    var $dataArmazenamento;
+    private $id;
+    private $idProdutor;
+    private $tipo;
+    private $quantidade;
+    private $dataArmazenamento;
 
-    function SacaDeCafe($id, $idProdutor, $tipo, $quantidade, $valorPorSaca, $dataArmazenamento) {
+    public function SacaDeCafe($id, $idProdutor, $tipo, $quantidade, $valorPorSaca, $dataArmazenamento) {
         $this->id = $id;
         $this->idProdutor = $idProdutor;
         $this->tipo = $tipo;
@@ -17,22 +17,22 @@ class SacaDeCafe{
         $this->dataArmazenamento = $dataArmazenamento;
     }
 
-    function getId(){
+    public function getId(){
         return $this->id;
     }
-    function getIdProdutor(){
+    public function getIdProdutor(){
         return $this->idProdutor;
     }
-    function getTipo(){
+    public function getTipo(){
         return $this->tipo;
     }
-    function getQuantidade(){
+    public function getQuantidade(){
         return $this->quantidade;
     }
-    function getDataArmazenamento(){
+    public function getDataArmazenamento(){
         return $this->dataArmazenamento;
     }
-    function getValorPorSaca() {
+    public function getValorPorSaca() {
         return $this->valorPorSaca;
     }
     

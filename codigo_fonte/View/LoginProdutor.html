@@ -15,12 +15,12 @@
         <h3>Login</h3>
         <fieldset>
             <label> Nome de usuário: </label>
-            <input name="usuario" placeholder = "username" type = "text" maxlength = "40" autofocus>
+            <input name="usuario" placeholder = "username" type = "text" maxlength = "40" required autofocus>
         </fieldset>
         
         <fieldset>
             <label> Senha: </label>
-            <input name="senha" placeholder = "password" type = "password">
+            <input name="senha" placeholder = "password" type = "password" required>
         </fieldset>
             
         
@@ -29,7 +29,10 @@
         </fieldset>
         
         <fieldset>
-            <button name = "submit" type = "submit" formaction="CadastroProdutor.html">Registrar</button>
+            <button name = "submit" type = "button" formaction="CadastroProdutor.html">Registrar</button>
+        </fieldset>
+        <fieldset>
+                 <a href="../index.html"><button name = "submit" type = "button">Voltar para a página inicial</button></a>
         </fieldset>
     </form>
     

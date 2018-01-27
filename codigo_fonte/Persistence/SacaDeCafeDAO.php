@@ -14,9 +14,9 @@ class SacaDeCafeDAO{
 
         
         if (!mysqli_query($link, $SQL)) {
-            die("Erro na inserção do usuário");
+            return "Erro na inserção do saca";
         }
-        echo "Saca cadastrado com sucesso!";
+        return "Saca cadastrado com sucesso!";
         
     }
     
@@ -24,10 +24,22 @@ class SacaDeCafeDAO{
     function buscarSacas($idProdutor, $tipo, $link) {
         $SQL = NULL;
         if($tipo == NULL) {
-            $SQL = "SELECT * FROM SacaDeCafe WHERE idProdutor = '".$idProdutor."';";
+            $SQL = "SELECT s.id, s.tipo, s.dataArmazenamento,
+                    s.quantidade, s.valorPorSaca, s.idProdutor, v.idSaca
+                    FROM SacaDeCafe s
+                    LEFT JOIN Venda v
+                    ON s.id = v.idSaca
+                    WHERE idProdutor = '".$idProdutor."' 
+                    AND v.idSaca is NULL;";
         } else {
-            $SQL = "SELECT * FROM SacaDeCafe WHERE tipo = '".$tipo."' AND
-                                                   idProdutor = '".$idProdutor."';";
+            $SQL = "SELECT s.id, s.tipo, s.dataArmazenamento,
+                    s.quantidade, s.valorPorSaca, s.idProdutor, v.idSaca
+                    FROM SacaDeCafe s
+                    LEFT JOIN Venda v
+                    ON s.id = v.idSaca
+                    WHERE idProdutor = '".$idProdutor."' 
+                    AND v.idSaca is NULL
+                    AND tipo = '".$tipo."';";
         }
 
         $retorno = mysqli_query($link, $SQL);
@@ -41,20 +53,16 @@ class SacaDeCafeDAO{
                                       dataArmazenamento = '".$saca->getDataArmazenamento()."',
                                       valorPorSaca = '".$saca->getValorPorSaca()."'
                                       WHERE id = '".$saca->getId()."';";
-        $retorno = mysqli_query($link, $SQL);
-        $retorno = $SQL;
-        return $retorno;
+        
+        if (!mysqli_query($link, $SQL)) {
+            return "Erro na edição do saca";
+        }
+        return "Saca editada com sucesso!";
+
     }
     
     function buscarSaca($id, $link) {
         $SQL = "SELECT * FROM SacaDeCafe WHERE id = '".$id."';";
-
-        $retorno = mysqli_query($link, $SQL);
-        return $retorno;
-    }
-    
-    function buscarPorTipo($tipo, $link) {
-        
 
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
@@ -65,9 +73,9 @@ class SacaDeCafeDAO{
         echo $SQL."<br>";
         
         if(!mysqli_query($link, $SQL)){
-            die("Erro na exclusão de cliente");
+            return ("Erro na exclusão de saca");
         }
-        echo "Cliente deletado com sucesso!";
+        return "Saca deletado com sucesso!";
         
     }
     

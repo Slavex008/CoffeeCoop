@@ -12,12 +12,10 @@
     $link = $conexao->getLink();
     
     $vendaDao = new VendaDAO();
-    date_default_timezone_set('America/Sao_Paulo');
-    $date = date('Y-m-d');
-    echo $vendaDao->editarAguardandoAprovacao($idSaca, $idCliente, 1, $date, $link);
+    echo $vendaDao->editarAguardandoAprovacao($idSaca, NULL, 0, NULL, $link);
     
     $conexao->fechar();
     
-    header("Location: ../View/TelaInicialCliente.php");
+    header("Location: ../View/TelaInicialGerente.php");
 
 ?>
