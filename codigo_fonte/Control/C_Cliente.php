@@ -50,14 +50,20 @@ class C_Cliente {
         try {
             $retorno = $clienteDao->logar($usuario, $senha, $link);
         
+			if($retorno < 0) {
+				echo 'Usuario ou senha incorretos!<br>
+						<a href="../View/LoginCliente.html"><button type="button">Voltar</button></a>';
+				$conexao->fechar();
+				return;
+			}
+        
+        
             $rs = $retorno->fetch_all();
-
-            foreach($rs as $linha) {
-                $idCliente = $linha[0];
-                $nome = $linha[1];
-                $user = $linha[2];
-                $pass = $linha[3];
-                
+			foreach($rs as $linha) {
+				$idCliente = $linha[0];
+				$nome = $linha[1];
+				$user = $linha[2];
+				$pass = $linha[3];
             }
 
             $cliente = new Cliente($idCliente, $nome, $user, $pass, $pass);

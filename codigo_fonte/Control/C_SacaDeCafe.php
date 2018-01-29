@@ -39,9 +39,6 @@ class C_SacaDeCafe {
     }
     
     public function consultaSacaPorId($idSaca) {
-        include_once("../Persistence/Conexao.php");
-        include_once("../Model/SacaDeCafe.php");
-        include_once("../Persistence/SacaDeCafeDAO.php");
         $conexao = new Conexao();
         $link = $conexao->getLink();
         

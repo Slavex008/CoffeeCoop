@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=utf-8');
 include_once("../Persistence/Conexao.php");
 include_once("../Model/Produtor.php");
 include_once("../Persistence/ProdutorDAO.php");
-include_once("../View/EstocarCafe.php");
+//~ include_once("../View/EstocarCafe.html");
     
 class C_Produtor {
     

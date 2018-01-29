@@ -9,7 +9,7 @@ class Conexao {
     private $link;
     
     
-    public function Conexao($servidor = 'localhost', $usuario = 'root', $senha = '32658254', $bd = 'CoffeeCoop') {
+    public function Conexao($servidor = 'localhost', $usuario = 'root', $senha = '', $bd = 'CoffeeCoop') {
         $this->servidor = $servidor;
         $this->usuario = $usuario;
         $this->senha = $senha;

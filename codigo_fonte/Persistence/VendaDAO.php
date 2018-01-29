@@ -22,7 +22,6 @@ class VendaDAO {
     
     
     function buscarVendas($tipo, $link) {
-        echo "AQUII";
         $SQL = NULL;
         if($tipo == NULL) {
             $SQL = "SELECT * FROM Venda v
@@ -75,7 +74,6 @@ class VendaDAO {
                 WHERE aguardandoAprovacao = '1';
                 ";
     
-        echo $SQL;
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
 
@@ -84,7 +82,6 @@ class VendaDAO {
     function excluirVenda($id, $link) {
         $SQL = "DELETE FROM Venda WHERE idSaca ='".$id."';";
 
-        echo $SQL."<br>";
         if(!mysqli_query($link, $SQL)){
             return "Erro na exclusão de vendas";
         }

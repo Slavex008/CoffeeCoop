@@ -3,12 +3,11 @@
     
     include_once("../Control/C_Venda.php");
     
-    $tipo = $_POST["inputbusca"];
     session_start();
     $idCliente = $_SESSION["user"];
     
     $controller = new C_Venda();
-    $rs = $controller->consultaVenda($tipo, "g");
+    $rs = $controller->consultaVenda(NULL, "g");
 ?>
 
 <html>

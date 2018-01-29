@@ -6,7 +6,6 @@
     $controller = new C_SacaDeCafe();
     
     $rs = $controller->consultaSaca($tipo);
-    echo "aQUI";
     
 ?>
 

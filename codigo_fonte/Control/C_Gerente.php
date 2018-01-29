@@ -50,6 +50,13 @@ class C_Gerente {
         try {
             $retorno = $gerenteDao->logar($usuario, $senha, $link);
         
+			if($retorno < 0) {
+				echo 'Usuario ou senha incorretos!<br>
+						<a href="../View/LoginGerente.html"><button type="button">Voltar</button></a>';
+				$conexao->fechar();
+				return;
+			}
+        
             $rs = $retorno->fetch_all();
 
             foreach($rs as $linha) {

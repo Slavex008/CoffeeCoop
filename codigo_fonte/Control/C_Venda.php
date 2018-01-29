@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=utf-8');
 include_once("../Persistence/Conexao.php");
 include_once("../Model/Venda.php");
 include_once("../Persistence/VendaDAO.php");
-include_once("../C_SacaDeCafe.php");
+include_once("C_SacaDeCafe.php");
     
 class C_Venda {
     
@@ -63,11 +63,11 @@ class C_Venda {
         
         $vendaDAO = new VendaDAO();
         $vendaDAO->excluirVenda($id, $link);
-        
+        $conexao->fechar();
         $controllerSaca = new C_SacaDeCafe();
         $controllerSaca->removeSaca($id);
         
-        $conexao->fechar();
+        
         header("Location: ../View/TelaInicialGerente.php");
     }
 }
