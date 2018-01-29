@@ -1,16 +1,15 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
-class Conexao{
-    var $servidor;
-    var $usuario;
-    var $senha;
-    var $bd;
-    var $link;
+class Conexao {
+    private $servidor;
+    private $usuario;
+    private $senha;
+    private $bd;
+    private $link;
     
     
-    
-    function Conexao($servidor = 'localhost', $usuario = 'root', $senha = '32658254', $bd = 'CoffeeCoop') {
+    public function Conexao($servidor = 'localhost', $usuario = 'root', $senha = '', $bd = 'CoffeeCoop') {
         $this->servidor = $servidor;
         $this->usuario = $usuario;
         $this->senha = $senha;
@@ -23,11 +22,11 @@ class Conexao{
         }
         
     }
-    function getLink(){
+    public function getLink(){
         return $this->link;
     }
     
-    function fechar(){
+    public function fechar(){
         mysqli_close($this->link);
     }
 }

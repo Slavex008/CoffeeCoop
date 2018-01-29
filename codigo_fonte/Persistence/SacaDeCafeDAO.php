@@ -70,7 +70,6 @@ class SacaDeCafeDAO{
     
     function excluir($id, $link) {
         $SQL = "DELETE FROM SacaDeCafe WHERE id ='".$id."';";
-        echo $SQL."<br>";
         
         if(!mysqli_query($link, $SQL)){
             return ("Erro na exclusão de saca");

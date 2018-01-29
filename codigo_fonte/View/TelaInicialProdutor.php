@@ -1,22 +1,14 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
     
-    include_once("../Persistence/Conexao.php");
-    include_once("../Model/SacaDeCafe.php");
-    include_once("../Persistence/SacaDeCafeDAO.php");
-    
-    $conexao = new Conexao();
-    $link = $conexao->getLink();
+    include_once("../Control/C_SacaDeCafe.php");
     $tipo = $_POST["inputbusca"];
-    session_start();
-    $idProdutor = $_SESSION["user"];
+    $controller = new C_SacaDeCafe();
     
-    $sacaDeCafeDao = new SacaDeCafeDAO();
-    $retorno = $sacaDeCafeDao->buscarSacas($idProdutor, $tipo, $link);
-    
-    $rs = $retorno->fetch_all();
+    $rs = $controller->consultaSaca($tipo);
     
 ?>
+
 
 <html>
     <head>
@@ -57,6 +49,7 @@
                         echo "<td class='botaotabela'><a href='../Control/Remover_Saca.php?id=".$indice."' title='Remover'><button class='btneditar' name = 'r".$indice."' type='button'>R</button></a></td>";
                         echo "<td class='botaotabela'><a href='../Control/Venda_Cad.php?id=".$indice."' title='Vender'><button class='btneditar' name = 'v".$indice."' type='button'>V</button></a></td>";
                         echo "</tr>";
+                        
                     }   
                 ?>
             </table>
@@ -70,3 +63,4 @@
     
     </body>
 </html>
+

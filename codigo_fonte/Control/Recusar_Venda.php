@@ -1,20 +1,12 @@
 <?php
-    header('Content-Type: text/html; charset=utf-8');
-    
-    include_once("../Persistence/Conexao.php");
-    include_once("../Persistence/VendaDAO.php");
+    include_once("C_Venda.php");
     session_start();
     
     $idCliente = $_SESSION["user"];
     $idSaca = $_GET["id"];
     
-    $conexao = new Conexao();
-    $link = $conexao->getLink();
-    
-    $vendaDao = new VendaDAO();
-    echo $vendaDao->editarAguardandoAprovacao($idSaca, NULL, 0, NULL, $link);
-    
-    $conexao->fechar();
+    $controller = new C_Venda();
+    $controller->editaVenda($idSaca, NULL, 0, NULL);
     
     header("Location: ../View/TelaInicialGerente.php");
 
