@@ -1,15 +1,15 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
+    echo getcwd();
     include_once("../Control/C_Venda.php");
-    
     $tipo = $_POST["inputbusca"];
     session_start();
     $idCliente = $_SESSION["user"];
     
     $controller = new C_Venda();
     $rs = $controller->consultaVenda($tipo, "c");
-
 ?>
+
 
 <html>
     <head>
@@ -60,4 +60,5 @@
     
     </body>
 </html>
+
 

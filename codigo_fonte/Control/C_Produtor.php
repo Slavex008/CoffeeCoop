@@ -1,10 +1,10 @@
+
 <?php
 header('Content-Type: text/html; charset=utf-8');
-    
+
 include_once("../Persistence/Conexao.php");
 include_once("../Model/Produtor.php");
 include_once("../Persistence/ProdutorDAO.php");
-//~ include_once("../View/EstocarCafe.html");
     
 class C_Produtor {
     
@@ -39,7 +39,68 @@ class C_Produtor {
               <a href='".$caminho."'><button>".$textoBTN."</button></a>";
 
     }
-   
+    
+    public function consultaProdutorPorId($id) {
+        $conexao = new Conexao();
+        $link = $conexao->getLink();
+        $produtorDao = new ProdutorDAO();
+            
+        $retorno = $produtorDao->consultaProdutorPorId($id, $link);
+        if($retorno < 0) {
+            echo 'Ocorreu um erro no cadastro!<br>
+                   <a href="../View/LoginProdutor.html"><button type="button">Voltar</button></a>';
+            $conexao->fechar();
+            return;
+        }
+        $rs = $retorno->fetch_all();
+        
+        $produtor = NULL;
+        foreach($rs as $linha) {
+            $produtor = new Produtor($linha[0], $linha[1], $linha[2], $linha[3],
+                                    $linha[4], $linha[5], $linha[6]);                                        
+        }
+        $conexao->fechar();
+        
+        return $produtor;
+    
+    }
+    
+    public function atualizarAoVender($produtor) {
+        $conexao = new Conexao();
+        $link = $conexao->getLink();
+        $produtorDao = new ProdutorDAO();
+        $produtorDao->atualizarAoVender($produtor, $link);
+        $conexao->fechar();
+    }
+    
+    
+    public function atualizarAoComprar($produtor) {
+        $conexao = new Conexao();
+        $link = $conexao->getLink();
+        $produtorDao = new ProdutorDAO();
+        $produtorDao->atualizarAoComprar($produtor, $link);
+        $conexao->fechar();
+    }
+    
+    
+    public function atualizarAoRecusar($produtor) {
+        $conexao = new Conexao();
+        $link = $conexao->getLink();
+        $produtorDao = new ProdutorDAO();
+        $produtorDao->atualizarAoRecusar($produtor, $link);
+        $conexao->fechar();
+    }
+    
+    public function atualizarAoConfirmarVenda($produtor) {
+        $conexao = new Conexao();
+        $link = $conexao->getLink();
+        $produtorDao = new ProdutorDAO();
+        $produtorDao->atualizarAoConfirmarVenda($produtor, $link);
+        $conexao->fechar();
+    }
+    
+    
+    
     public function logar($usuario, $senha) {
         $conexao = new Conexao();
         $link = $conexao->getLink();

@@ -36,7 +36,6 @@ class ProdutorDAO{
     
     public function logar($usuario, $senha, $link) {
         $SQL = "SELECT * FROM produtor WHERE usuario ='".$usuario."' and senha = '".$senha."';";
-        echo $SQL."<br>";
         $retorno = mysqli_query($link, $SQL);
 
         if (mysqli_num_rows($retorno) > 0) {
@@ -46,6 +45,94 @@ class ProdutorDAO{
         }
         
     }
+    
+    public function consultaProdutorPorId($idProdutor, $link) {
+        $SQL = "SELECT * FROM produtor WHERE id = '".$idProdutor."';";
+        $retorno = mysqli_query($link, $SQL);
+        if (mysqli_num_rows($retorno) > 0) {
+            return $retorno;
+        } else {
+            return -1;
+        }
+    }
+    
+    
+    public function atualizarAoVender($produtor, $link, $tipoUsuario) {
+        $qtdAVenda = $produtor->getQuantidadeAVenda() + 1;
+        $id = $produtor->getId();
+        $produtor->setQuantidadeAVenda($qtdAVenda);
+        $SQL = "UPDATE produtor SET
+                quantidadeAVenda = '".$qtdAVenda."'
+                WHERE id = '".$id."';";
+        if (!mysqli_query($link, $SQL)) {
+            return $retorno;
+        } else {
+            return -1;
+        }
+        
+    }
+    
+    public function atualizarAoComprar($produtor, $link) {
+        $qtdAguardando = $produtor->getQuantidadeAguardandoAprovacao() + 1;
+        $qtdAVenda = $produtor->getQuantidadeAVenda() - 1;
+        $id = $produtor->getId();
+        $produtor->setQuantidadeAVenda($qtdAVenda);
+        $produtor->setQuantidadeAguardandoAprovacao($qtdAguardando);
+        $SQL = "UPDATE produtor SET
+                quantidadeAVenda = '".$qtdAVenda."',
+                quantidadeAguardandoAprovacao = '".$qtdAguardando."'
+                WHERE id = '".$id."';";
+                
+        echo $SQL;
+        if (!mysqli_query($link, $SQL)) {
+            return $retorno;
+        } else {
+            return -1;
+        }
+        
+    }
+    
+    public function atualizarAoRecusar($produtor, $link) {
+        $qtdAguardando = $produtor->getQuantidadeAguardandoAprovacao() - 1;
+        $qtdAVenda = $produtor->getQuantidadeAVenda() + 1;
+        $id = $produtor->getId();
+        $produtor->setQuantidadeAVenda($qtdAVenda);
+        $produtor->setQuantidadeAguardandoAprovacao($qtdAguardando);
+        $SQL = "UPDATE produtor SET
+                quantidadeAVenda = '".$qtdAVenda."',
+                quantidadeAguardandoAprovacao = '".$qtdAguardando."'
+                WHERE id = '".$id."';";
+                
+        echo $SQL;
+        if (!mysqli_query($link, $SQL)) {
+            return $retorno;
+        } else {
+            return -1;
+        }
+        
+    }
+    
+    public function atualizarAoConfirmarVenda($produtor, $link) {
+        $qtdAguardando = $produtor->getQuantidadeAguardandoAprovacao() - 1;
+        $qtdVendida = $produtor->getQuantidadeVendida() + 1;
+        $id = $produtor->getId();
+        $produtor->setQuantidadeVendida($qtdVendida);
+        $produtor->setQuantidadeAguardandoAprovacao($qtdAguardando);
+        $SQL = "UPDATE produtor SET
+                quantidadeVendidas = '".$qtdVendida."',
+                quantidadeAguardandoAprovacao = '".$qtdAguardando."'
+                WHERE id = '".$id."';";
+                
+        echo $SQL;
+        if (!mysqli_query($link, $SQL)) {
+            return $retorno;
+        } else {
+            return -1;
+        }
+        
+    }
+    
+    
     
 }
 

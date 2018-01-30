@@ -41,7 +41,6 @@ class C_SacaDeCafe {
     public function consultaSacaPorId($idSaca) {
         $conexao = new Conexao();
         $link = $conexao->getLink();
-        
         $sacaDAO = new SacaDeCafeDAO();
         $retorno = $sacaDAO->buscarSaca($idSaca, $link);
         $saca = NULL;
