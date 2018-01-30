@@ -39,7 +39,8 @@ class C_Venda {
             case "g":
                 $retorno = $vendaDao->buscarComprasPendentes($link);
                 break;
-        } 
+        }
+        echo "AQUI";
         $conexao->fechar();
         return $retorno->fetch_all();
     }

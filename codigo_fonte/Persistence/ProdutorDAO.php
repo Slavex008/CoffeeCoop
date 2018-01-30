@@ -11,9 +11,10 @@ class ProdutorDAO{
             return -2;
         }
         
-        $SQL = "INSERT INTO Produtor VALUES ('0','".$produtor->getNome()."',
+        $SQL = "INSERT INTO produtor VALUES ('0','".$produtor->getNome()."',
                                             '".$produtor->getUsuario()."',
-                                            '".$produtor->getSenha()."');";
+                                            '".$produtor->getSenha().",
+                                            0, 0, 0');";
                                             
         if (!mysqli_query($link, $SQL)) {
             return -1;
@@ -24,7 +25,7 @@ class ProdutorDAO{
     }
     
     public function excluir($produtor, $link) {
-        $SQL = "DELETE FROM Produtor WHERE usuario ='".$produtor->getUsuario()."';";
+        $SQL = "DELETE FROM produtor WHERE usuario ='".$produtor->getUsuario()."';";
         
         if(!mysqli_query($link, $SQL)){
             return ("Erro na exclusão de Produtor");
@@ -34,8 +35,8 @@ class ProdutorDAO{
     }
     
     public function logar($usuario, $senha, $link) {
-        $SQL = "SELECT * FROM Produtor WHERE usuario ='".$usuario."' and senha = '".$senha."';";
-
+        $SQL = "SELECT * FROM produtor WHERE usuario ='".$usuario."' and senha = '".$senha."';";
+        echo $SQL."<br>";
         $retorno = mysqli_query($link, $SQL);
 
         if (mysqli_num_rows($retorno) > 0) {

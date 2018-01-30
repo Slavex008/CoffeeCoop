@@ -43,7 +43,6 @@ class C_Produtor {
     public function logar($usuario, $senha) {
         $conexao = new Conexao();
         $link = $conexao->getLink();
-        
         $produtorDao = new ProdutorDAO();
             
         $retorno = $produtorDao->logar($usuario, $senha, $link);
