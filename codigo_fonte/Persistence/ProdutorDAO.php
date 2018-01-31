@@ -27,9 +27,9 @@ class ProdutorDAO{
     
     public function senhaIgualConfirmaSenha($senha, $confirmaSenha){
         if(strcmp($senha, $confirmaSenha) != 0) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     
     public function excluir($produtor, $link) {
