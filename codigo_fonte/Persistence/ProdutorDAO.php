@@ -13,9 +13,8 @@ class ProdutorDAO{
         
         $SQL = "INSERT INTO produtor VALUES ('0','".$produtor->getNome()."',
                                             '".$produtor->getUsuario()."',
-                                            '".$produtor->getSenha().",
+                                            '".$produtor->getSenha()."',
                                             '0', '0', '0');";
-                                            
         if (!mysqli_query($link, $SQL)) {
             return -1;
         }
