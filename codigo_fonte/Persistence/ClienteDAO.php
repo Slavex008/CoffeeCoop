@@ -10,7 +10,7 @@ class ClienteDAO{
             return -2;
         }
         
-        $SQL = "INSERT INTO Cliente VALUES ('0','".$cliente->getNome()."',
+        $SQL = "INSERT INTO cliente VALUES ('0','".$cliente->getNome()."',
                                             '".$cliente->getUsuario()."',
                                             '".$cliente->getSenha()."');";
                                             
@@ -23,7 +23,7 @@ class ClienteDAO{
     }
     
     function logar($usuario, $senha, $link) {
-        $SQL = "SELECT * FROM Cliente WHERE usuario ='".$usuario."' and senha = '".$senha."';";
+        $SQL = "SELECT * FROM cliente WHERE usuario ='".$usuario."' and senha = '".$senha."';";
 
         $retorno = mysqli_query($link, $SQL);   
         

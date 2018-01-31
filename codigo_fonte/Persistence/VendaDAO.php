@@ -6,7 +6,7 @@ include_once("../Model/Venda.php");
 class VendaDAO {
 
     function cadastrarVenda($venda, $link) {
-        $SQL = "INSERT INTO Venda VALUES ('".$venda->getIdSaca()."',
+        $SQL = "INSERT INTO venda VALUES ('".$venda->getIdSaca()."',
                                             NULL,
                                             '".$venda->getValorPorSaca()."',
                                             0, 
@@ -24,14 +24,14 @@ class VendaDAO {
     function buscarVendas($tipo, $link) {
         $SQL = NULL;
         if($tipo == NULL) {
-            $SQL = "SELECT * FROM Venda v
-                    JOIN SacaDeCafe s
+            $SQL = "SELECT * FROM venda v
+                    JOIN sacadecafe s
                     ON v.idSaca = s.id
                     WHERE aguardandoAprovacao = '0';
                     ";
         } else {
-            $SQL = "SELECT * FROM Venda v
-                    JOIN SacaDeCafe s
+            $SQL = "SELECT * FROM venda v
+                    JOIN sacadecafe s
                     ON v.idSaca = s.id
                     WHERE s.tipo ='".$tipo."'
                           AND aguardandoAprovacao = '0';
@@ -51,7 +51,7 @@ class VendaDAO {
             $idCliente = 'NULL';
             $dataCompra = 'NULL';
         }
-        $SQL = "UPDATE Venda SET idCliente = ".$idCliente.",
+        $SQL = "UPDATE venda SET idCliente = ".$idCliente.",
                                  aguardandoAprovacao = '".$aguardandoAprovacao."',
                                  dataCompra = ".$dataCompra."
                                  WHERE idSaca = '".$idSaca."';";
@@ -64,23 +64,24 @@ class VendaDAO {
     
     function buscarComprasPendentes($link) {
     
-        $SQL = "SELECT v.idSaca, c.nome as cNome, p.nome as pNome, s.valorPorSaca, s.quantidade, v.dataCompra  FROM Venda v
-                JOIN SacaDeCafe s
+        $SQL = "SELECT v.idSaca, c.nome as cNome, p.nome as pNome, s.valorPorSaca, s.quantidade, v.dataCompra
+                FROM venda v
+                JOIN sacadecafe s
                 ON v.idSaca = s.id
-                JOIN Cliente c
+                JOIN cliente c
                 ON v.idCliente = c.id
-                JOIN Produtor p
+                JOIN produtor p
                 ON s.idProdutor = p.id
                 WHERE aguardandoAprovacao = '1';
                 ";
-    
+        echo $SQL."<br>";
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
 
     }
     
     function excluirVenda($id, $link) {
-        $SQL = "DELETE FROM Venda WHERE idSaca ='".$id."';";
+        $SQL = "DELETE FROM venda WHERE idSaca ='".$id."';";
 
         if(!mysqli_query($link, $SQL)){
             return "Erro na exclusão de vendas";

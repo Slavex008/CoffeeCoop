@@ -2,7 +2,12 @@
     header('Content-Type: text/html; charset=utf-8');
     
     include_once("../Control/C_SacaDeCafe.php");
-    $tipo = $_POST["inputbusca"];
+    
+    $tipo = NULL;
+    if(isset($_POST['inputbusca'])) {
+        $tipo = $_POST["inputbusca"];
+    }
+    
     $controller = new C_SacaDeCafe();
     
     $rs = $controller->consultaSaca($tipo);
@@ -56,6 +61,9 @@
         </form>
         <br><br>
         <a href="EstocarCafe.html"><button name = "submit" type = "submit" class='btninicial'>Inserir</button></a>
+        <div>
+            <a href="TelaQuantidadesProdutor.php"><button name = "submit" type = "button" class='btninicial'>Vendas</button></a>
+        </div>
         <div>
             <a href="../Control/Logout.php"><button name = "submit" type = "submit" class='btninicial'>Sair</button></a>
         </div>

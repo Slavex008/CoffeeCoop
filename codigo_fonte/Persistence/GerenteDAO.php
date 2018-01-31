@@ -11,7 +11,7 @@ class GerenteDAO{
             return -2;
         }
         
-        $SQL = "INSERT INTO Gerente VALUES ('0','".$gerente->getNome()."',
+        $SQL = "INSERT INTO gerente VALUES ('0','".$gerente->getNome()."',
                                             '".$gerente->getUsuario()."',
                                             '".$gerente->getSenha()."');";
                                             
@@ -24,7 +24,7 @@ class GerenteDAO{
     }
     
     public function logar($usuario, $senha, $link) {
-        $SQL = "SELECT * FROM Gerente WHERE usuario ='".$usuario."' and senha = '".$senha."';";
+        $SQL = "SELECT * FROM gerente WHERE usuario ='".$usuario."' and senha = '".$senha."';";
 
         $retorno = mysqli_query($link, $SQL);
 
