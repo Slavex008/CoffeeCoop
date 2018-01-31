@@ -7,14 +7,14 @@ class ProdutorDAO{
 
     
     public function cadastrar($produtor, $link, $confirmaSenha) {
-        if(senhaIgualConfirmaSenha($produtor->getSenha(), $confirmaSenha)) {
+        if($this->senhaIgualConfirmaSenha($produtor->getSenha(), $confirmaSenha)) {
             return -2;
         }
         
         $SQL = "INSERT INTO produtor VALUES ('0','".$produtor->getNome()."',
                                             '".$produtor->getUsuario()."',
                                             '".$produtor->getSenha().",
-                                            0, 0, 0');";
+                                            '0', '0', '0');";
                                             
         if (!mysqli_query($link, $SQL)) {
             return -1;
