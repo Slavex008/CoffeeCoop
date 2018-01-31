@@ -1,12 +1,12 @@
-
 <?php
+declare(strict_types=1);
 header('Content-Type: text/html; charset=utf-8');
 
 include_once("../Persistence/Conexao.php");
 include_once("../Model/Produtor.php");
 include_once("../Persistence/ProdutorDAO.php");
     
-class C_Produtor {
+final class C_Produtor {    
     
     public function cadastrar($nome, $usuario, $senha, $confirmaSenha) {
         $conexao = new Conexao();
@@ -44,10 +44,9 @@ class C_Produtor {
         $conexao = new Conexao();
         $link = $conexao->getLink();
         $produtorDao = new ProdutorDAO();
-            
         $retorno = $produtorDao->consultaProdutorPorId($id, $link);
-        if($retorno < 0) {
-            echo 'Ocorreu um erro no cadastro!<br>
+        if(!($retorno instanceOf mysqli_result) and $retorno < 0) {
+            echo 'ERRO NA BUSCA!<br>
                    <a href="../View/LoginProdutor.html"><button type="button">Voltar</button></a>';
             $conexao->fechar();
             return;

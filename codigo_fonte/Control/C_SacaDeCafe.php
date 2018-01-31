@@ -76,5 +76,6 @@ class C_SacaDeCafe {
         $conexao->fechar();
         header("Location: ../View/TelaInicialProdutor.php");
     }
+    
 }
 ?>

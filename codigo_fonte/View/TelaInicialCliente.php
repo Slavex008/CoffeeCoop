@@ -1,8 +1,12 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
-    echo getcwd();
     include_once("../Control/C_Venda.php");
-    $tipo = $_POST["inputbusca"];
+    
+    $tipo = NULL;
+    if(isset($_POST['inputbusca'])) {
+        $tipo = $_POST["inputbusca"];
+    }
+    
     session_start();
     $idCliente = $_SESSION["user"];
     

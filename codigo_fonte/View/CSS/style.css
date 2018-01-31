@@ -180,7 +180,7 @@ fieldset {
 .btninicial {
     background-color: lightgreen;
     color: white;
-    width: 80px;
+    width: 100px;
     height: 22px;
     font-size: 15px;
     font-family: Arial;
@@ -232,4 +232,11 @@ fieldset {
 
 .cabecalhoinicial {
     font-size: 16px;
+}
+
+.divQuantidades {
+    font-size: 17px;
+    font-family: Arial;
+    margin-left: 40px;
+    
 }
