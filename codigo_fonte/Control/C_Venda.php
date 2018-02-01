@@ -21,17 +21,19 @@ class C_Venda {
             $vendaDao = new VendaDAO();
             $retorno = $vendaDao->cadastrarVenda($venda, $link);
             
+        
+			if($venda->getAguardandoAprovacao() == 0) {
+				$controllerProd = new C_Produtor();
+				$produtor = $controllerProd->consultaProdutorPorId($saca->getIdProdutor());
+				if($produtor != NULL) {
+					$controllerProd->atualizarAoVender($produtor);
+				}
+				
+			}
         }
         
         
-        if($aguardandoAprovacao == 0) {
-            $controllerProd = new C_Produtor();
-            $produtor = $controllerProd->consultaProdutorPorId($saca->getIdProdutor());
-            if($produtor != NULL) {
-                $controllerProd->atualizarAoVender($produtor);
-            }
-            
-        }
+        
         
         
         echo "<p>".$retorno."</p><a href='../View/TelaInicialProdutor.php'><button>OK</button>";
@@ -67,7 +69,6 @@ class C_Venda {
             $produtor = $controllerProd->consultaProdutorPorId($id);
             if($produtor != NULL) {
                 $controllerProd->atualizarAoRecusar($produtor);
-                echo "AQUI";
             }
             
         }
@@ -101,14 +102,14 @@ class C_Venda {
         $controllerProd = new C_Produtor();
         $produtor = $controllerProd->consultaProdutorPorId($idProd);
         $controllerProd->atualizarAoConfirmarVenda($produtor);
-        echo "AQUI";
         
-        $controllerSaca->removeSaca($id);
         
         $conexao = new Conexao();
         $link = $conexao->getLink();
         $vendaDAO = new VendaDAO();
         $vendaDAO->excluirVenda($id, $link);
+        
+        $controllerSaca->removeSaca($id);
         $conexao->fechar();
         
         

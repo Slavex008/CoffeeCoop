@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 header('Content-Type: text/html; charset=utf-8');
 
 include_once("../Persistence/Conexao.php");
@@ -123,7 +123,6 @@ final class C_Produtor {
         }
         session_start();
         $_SESSION["user"] = $id;
-        echo $_SESSION["user"];
         $produtor = new Produtor($id, $nome, $user, $pass, $pass);
 
         $SQL = "String = ".$produtor->getId().",

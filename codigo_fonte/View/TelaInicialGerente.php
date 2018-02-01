@@ -8,7 +8,6 @@
     
     $controller = new C_Venda();
     $rs = $controller->consultaVenda(NULL, "g");
-    echo $rs;
     
 ?>
 

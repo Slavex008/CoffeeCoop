@@ -74,7 +74,7 @@ class VendaDAO {
                 ON s.idProdutor = p.id
                 WHERE aguardandoAprovacao = '1';
                 ";
-        echo $SQL."<br>";
+                
         $retorno = mysqli_query($link, $SQL);
         return $retorno;
 

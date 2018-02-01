@@ -64,7 +64,7 @@ class ProdutorDAO{
     }
     
     
-    public function atualizarAoVender($produtor, $link, $tipoUsuario) {
+    public function atualizarAoVender($produtor, $link) {
         $qtdAVenda = $produtor->getQuantidadeAVenda() + 1;
         $id = $produtor->getId();
         $produtor->setQuantidadeAVenda($qtdAVenda);
@@ -90,7 +90,6 @@ class ProdutorDAO{
                 quantidadeAguardandoAprovacao = '".$qtdAguardando."'
                 WHERE id = '".$id."';";
                 
-        echo $SQL;
         if (!mysqli_query($link, $SQL)) {
             return $retorno;
         } else {
@@ -110,7 +109,6 @@ class ProdutorDAO{
                 quantidadeAguardandoAprovacao = '".$qtdAguardando."'
                 WHERE id = '".$id."';";
                 
-        echo $SQL;
         if (!mysqli_query($link, $SQL)) {
             return $retorno;
         } else {
@@ -130,7 +128,6 @@ class ProdutorDAO{
                 quantidadeAguardandoAprovacao = '".$qtdAguardando."'
                 WHERE id = '".$id."';";
                 
-        echo $SQL;
         if (!mysqli_query($link, $SQL)) {
             return $retorno;
         } else {
