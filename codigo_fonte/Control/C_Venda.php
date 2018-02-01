@@ -108,9 +108,9 @@ class C_Venda {
         $link = $conexao->getLink();
         $vendaDAO = new VendaDAO();
         $vendaDAO->excluirVenda($id, $link);
-        
-        $controllerSaca->removeSaca($id);
         $conexao->fechar();
+        $controllerSaca->removeSaca($id);
+        
         
         
         header("Location: ../View/TelaInicialGerente.php");
