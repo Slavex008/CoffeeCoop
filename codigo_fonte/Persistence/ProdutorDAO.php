@@ -7,7 +7,7 @@ class ProdutorDAO{
 
     
     public function cadastrar($produtor, $link, $confirmaSenha) {
-        if($this->senhaIgualConfirmaSenha($produtor->getSenha(), $confirmaSenha)) {
+        if(!($this->senhaIgualConfirmaSenha($produtor->getSenha(), $confirmaSenha))) {
             return -2;
         }
         
@@ -26,9 +26,9 @@ class ProdutorDAO{
     
     public function senhaIgualConfirmaSenha($senha, $confirmaSenha){
         if(strcmp($senha, $confirmaSenha) != 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
     
     public function excluir($produtor, $link) {
